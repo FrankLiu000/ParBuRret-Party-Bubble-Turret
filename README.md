@@ -5,7 +5,7 @@ Some college undergraduates wanted a toy to play with, and they launched this pr
 
 I. The project mainly realizes the following functions:
 
-Build a rotating turret that automatically identifies and "attacks" targets within a range.
+  Build a rotating turret that automatically identifies and "attacks" targets within a range.
 
 
 II. The project includes the following modules:
