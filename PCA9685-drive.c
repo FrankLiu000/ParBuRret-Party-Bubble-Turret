@@ -24,13 +24,6 @@ sbit sda=P3^7;
 #define ALLLED_OFF_L 0xFC
 #define ALLLED_OFF_H 0xFD
 
-void delayms(uint z)
-{
-  uint x,y;
-  for(x=z;x>0;x--)
-      for(y=148;y>0;y--);
-}
-
 void delayus()
 {
 	_nop_();
@@ -38,6 +31,13 @@ void delayus()
 	_nop_();
 	_nop_();
 	_nop_();
+}
+
+void delayms(uchar x)
+{
+	uchar i,j;
+	for(i=x;i>0;i--)
+		for(j=0;j<110;j++);
 }
 
 void init()
@@ -153,21 +153,11 @@ uchar PCA9685_read(uchar address)
 	return date;
 }
 
-void reset(void)
-{
-	PCA9685_write(PCA9685_MODE1,0x0);
-}
-
-void begin(void)
-{
-	reset();
-}
-
 void setPWMFreq(float freq)
 {
 	uint prescale,oldmode,newmode;
 	float prescaleval;
-	freq *= 0.915;
+	freq *= 0.92;
 	prescaleval = 25000000;
 	prescaleval /= 4096;
 	prescaleval /= freq;
@@ -183,6 +173,12 @@ void setPWMFreq(float freq)
 	PCA9685_write(PCA9685_MODE1, oldmode | 0xa1);
 }
 
+void ServoInit(void)
+{
+	PCA9685_write(PCA9685_MODE1,0x0);
+	setPWMFreq(50); 
+}
+
 void setPWM(uint num, uint on, uint off)
 {
 	PCA9685_write(LED0_ON_L+4*num,on);
@@ -191,17 +187,31 @@ void setPWM(uint num, uint on, uint off)
 	PCA9685_write(LED0_OFF_H+4*num,off>>8);
 }
 
-void main()
+void RotateClockwiseX(void)                                             //Run ServoInit() at the beginning.
 {
-	begin();
-	setPWMFreq(50);  
-	while(1)
-	{
-		int i;
-		for(i=0;i<=4096;i+=100)                   //PWM rate for servo control remain undetermined.
-		{
-			setPWM(0, 0, i);
-			delayms(1500);
-		}
-	}               
+	setPWM(0,0,74);
+}
+
+void RotateStopX(void)
+{
+	setPWM(0,0,274);
+}
+
+void RotateCounterClockwiseX(void)
+{
+	setPWM(0,0,478);
+}
+void RotateClockwiseY(void)
+{
+	setPWM(1,0,74);
+}
+
+void RotateStopY(void)
+{
+	setPWM(1,0,274);
+}
+
+void RotateCounterClockwiseY(void)
+{
+	setPWM(1,0,478);
 }
