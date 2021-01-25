@@ -1,7 +1,10 @@
-# Automatic-Toy-Turret-Based-on-8051-Microcontrollers
+# ParBuRret-Party Bubble Turret
+
+## An Automatic-Toy-Turret-Based-on-8051-Microcontrollers
 
 Some college undergraduates wanted a toy to play with, and they launched this project. It does no harm to anyone, since it’s too weak and shabby.
 
+This thing is called ParBuRret(the abbreviation of Party Bubble Turret), a recursion explantion is ParBuRret Another Reckless Bubble-Urinating Really Rentless Electronic Turret.
 
 I. The project mainly realizes the following functions:
 
